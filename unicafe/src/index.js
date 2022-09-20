@@ -10,7 +10,7 @@ const Display = (props) => {
 
   return (
     <div>
-      
+
       {props.text}
       {props.value}
       {props.percent}
@@ -30,41 +30,93 @@ const App = () => {
   const [allClicks, setAll] = useState(0)
 
   const goodClicks = () => {
-    setAll(allClicks+1)
+    setAll(allClicks + 1)
     setGood(good + 1)
   }
 
   const neutralClicks = () => {
-    setAll(allClicks+1)
+    setAll(allClicks + 1)
     setNeutral(neutral + 1)
   }
 
   const badClicks = () => {
-    setAll(allClicks+1)
+    setAll(allClicks + 1)
     setBad(bad + 1)
   }
+  if (good > 0 || neutral > 0 || bad > 0) {
+    return (
+      <div>
 
-  return (
-    <div>
-
-
-      <button onClick={goodClicks}> good</button>
-
-      <button onClick={neutralClicks}> neutral</button>
-
-      <button onClick={badClicks}> bad</button>
-
-     
-      <Display text={"Good: "} value={good} />
-      <Display text={"Neutral: "} value={neutral} />
-      <Display text={"Bad: "} value={bad} />
-      <Display text={"All: "} value={allClicks} />
-      <Display text={"Average: "} value={(good-bad)/allClicks} />
-      <Display text={"Positive: "} value={(good*100)/allClicks} percent={"%"} />
+        <p>Give Feedback</p>
 
 
-    </div>
-  )
+        <button onClick={goodClicks}> good</button>
+
+        <button onClick={neutralClicks}> neutral</button>
+
+        <button onClick={badClicks}> bad</button>
+
+        <p>Statistics</p>
+
+        <table>
+          <tr>
+            <th><Display text={"Good: "} /></th>
+            <th><Display value={good} /></th>
+          </tr>
+          <tr>
+            <th><Display text={"Neutral: "} /></th>
+            <th><Display value={neutral} /></th>
+          </tr>
+          <tr>
+            <th><Display text={"Bad: "} /></th>
+            <th><Display value={bad} /></th>
+          </tr>
+          <tr>
+            <th><Display text={"All: "} /></th>
+            <th><Display value={allClicks} /></th>
+          </tr>
+          <tr>
+            <th><Display text={"Average: "} /></th>
+            <th><Display value={(good - bad) / allClicks} /></th>
+          </tr>
+          <tr>
+            <th><Display text={"Positive: "} /></th>
+            <th><Display value={(good * 100) / allClicks} percent={"%"}  /></th>
+          </tr>
+
+
+        </table>
+        
+
+
+      </div>
+    )
+
+  }
+  else {
+    return (
+      <div>
+
+        <p>Give Feedback</p>
+
+
+        <button onClick={goodClicks}> good</button>
+
+        <button onClick={neutralClicks}> neutral</button>
+
+        <button onClick={badClicks}> bad</button>
+
+        <p>No Feedback given.</p>
+
+
+
+
+      </div>
+    )
+
+  }
+
+
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
